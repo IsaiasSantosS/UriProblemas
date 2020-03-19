@@ -1,9 +1,10 @@
 #include <stdio.h>
+ int busca(int* arranjo,int x,int n){
+    int p,r,q;
 
-int busca(int* arranjo,int x,int t){
-    int p = 0;
-    int r = t-1;
-    int q = 0;
+    p = 0;
+    r = n-1;
+
     while (p <= r)
     {
         q = (p+r)/2;
@@ -16,41 +17,39 @@ int busca(int* arranjo,int x,int t){
             r = q - 1;
         } else { p = q + 1; }        
     }
+
     return -1;
 }
-
-int main(){
-    int n,i, soma, aux, espaco, cont;
+int main() {
+ int n,i, soma, espaco, cont;
     
-    scanf("%d", &n);
-
-      int p[n];
-      soma = 0;
-      cont = 0;
-      aux = 0;
-          
-      for ( i = 0; i < n; i++)
-      {
-        scanf("%d", &aux);
-        soma = aux + soma;
+    while(scanf("%d", &n) != -1){
+        int p[n];
+        soma = 0;
+        cont = 0;
+            
+        for ( i = 0; i < n; i++)
+        {
+        scanf("%d", &p[i]);
+        soma = p[i] + soma;
         p[i] = soma;
-      }
-
-      if ((soma % 3) != 0) {
+        }
+        if ((soma % 3) != 0) {
         printf("0\n");
-      } else {
+        } else {
         espaco = soma/3;
         
         for ( i = 0; i < n; i++)
         {
-          if ( busca(p, p[i]+espaco, n) != -1){
+            if ( busca(p, p[i]+espaco, n) != -1){
             if ( busca(p, p[i]+(2*espaco), n) != -1){
-              cont ++;
+                cont ++;
             } 
-          }  
+            }  
         } 
         printf("%d\n", cont);
-      }
-    
+        }
+    }
     return 0;
+
 }
